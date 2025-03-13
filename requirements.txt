@@ -1,0 +1,12 @@
+polars
+pandas
+numpy
+feature-engine
+scikit-learn
+tensorflow
+matplotlib
+kaggle
+ipykernel
+jupyter
+notebook
+darts
