@@ -3,6 +3,7 @@ pandas
 numpy
 feature-engine
 scikit-learn
+scikit-image
 tensorflow
 matplotlib
 kaggle
@@ -10,3 +11,4 @@ ipykernel
 jupyter
 notebook
 darts
+statsmodels
