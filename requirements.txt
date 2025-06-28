@@ -4,6 +4,8 @@ numpy
 feature-engine
 scikit-learn
 scikit-image
+scikit-optimize
+xgboost
 tensorflow
 matplotlib
 kaggle
@@ -12,3 +14,4 @@ jupyter
 notebook
 darts
 statsmodels
+seaborn

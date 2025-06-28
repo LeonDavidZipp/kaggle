@@ -131,7 +131,12 @@ class TitanicTransformer:
 		])
 
 		num_cols = ["SibSp", "Parch"]
-		cat_cols = ["Pclass", "Sex", "Embarked", "Deck", "Side", "Sections", "CabinType", "AgeCat"]
+		cat_cols = [
+			"Pclass", "Sex",
+			"Deck", "Side",
+			# "Sections", "Embarked", "Side", "CabinType",
+			"AgeCat"
+		]
 
 		self.col_transf = ColumnTransformer(
 			[
@@ -171,7 +176,7 @@ class TitanicTransformer:
 
 	def drop_cols(self, df: pl.DataFrame) -> pl.DataFrame:
 		return df.drop(
-			["PassengerId", "Name", "Ticket", "Fare"],
+			["PassengerId", "Name", "Ticket", "Fare", "Embarked"],
 			strict=False
 		)
 
@@ -190,9 +195,10 @@ class TitanicTransformer:
 				.alias("Number")
 			).drop(
 				["Cabin", "FirstCabin"]
-			).with_columns(side_col_expr)
-			.with_columns(section_col_expr)
-			.with_columns(inner_outer_col_expr)
+			)
+			.with_columns(side_col_expr)
+			# .with_columns(section_col_expr)
+			# .with_columns(inner_outer_col_expr)
 			.with_columns(
 				pl.col("Deck").map_elements(lambda s: "unknown" if not s else s, return_dtype=pl.String)
 			)
@@ -224,7 +230,7 @@ class TitanicTransformer:
 			df.with_columns(
 				pl.col("Pclass").cast(pl.String).cast(pl.Categorical),
 				pl.col("Sex").cast(pl.Categorical),
-				pl.col("Embarked").cast(pl.Categorical),
+				# pl.col("Embarked").cast(pl.Categorical),
 				pl.col("Deck").cast(pl.Categorical),
 			)
 		)
